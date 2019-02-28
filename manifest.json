@@ -1,0 +1,26 @@
+{
+	"name": "BeachBoard Autologin",
+	"version": "1.0",
+	"description": "Clicks the login button",
+	"permissions": ["declarativeContent", "storage"],
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": false
+	},
+	"page_action": {
+		"default_popup": "popup.html"
+	},
+	 "content_scripts": [
+        {
+            "matches": [
+                "*://*/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_end"
+        }
+	],
+	"options_page": "options.html",
+	"manifest_version": 2
+}
