@@ -1,20 +1,16 @@
 'use strict';
 
-let pauseButton = document.getElementById('pause');
+let enabledCheckbox = document.getElementById('pause');
 
 function updateButton(activated) {
-  pauseButton.style.backgroundColor = activated ? 'green' : 'red';
-  pauseButton.setAttribute('value', activated);
+  enabledCheckbox.checked = activated;
 }
 
 
-chrome.storage.sync.get('activated', function(data) {
-  updateButton(data.activated)
+chrome.storage.sync.get('activated', function (data) {
+  enabledCheckbox.checked = data.activated;
 });
 
-pauseButton.onclick = function(element) {
-  chrome.storage.sync.get('activated', function(data) {
-    updateButton(!data.activated);
-    chrome.storage.sync.set({activated: !data.activated});
-  });
+enabledCheckbox.onchange = function (element) {
+  chrome.storage.sync.set({ activated: enabledCheckbox.checked });
 }
